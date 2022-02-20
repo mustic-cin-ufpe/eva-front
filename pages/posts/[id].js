@@ -11,7 +11,7 @@ export async function getServerSideProps({ query }) {
 
     const { id } = query;
     //o range que ele vai pegar da linha especifica
-    const range = `A${id}:C${id}`;
+    const range = `A${id}:X${id}`;
     //console.log(sheets.spreadsheets)
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SHEET_ID,

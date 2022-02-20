@@ -9,11 +9,11 @@ export async function getServerSideProps({ query }) {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'A2:A',
+    range: 'A5:A',
   });
 
   const posts = response.data.values.flat();
-
+  console.log(response.data)
   return {
     props: {
       posts,
@@ -28,7 +28,7 @@ export default function Post({ posts }) {
       <ul>
         {posts.map((v, i) => (
           <li key={v}>
-            <Link href={`posts/${i + 2}`}>
+            <Link href={`posts/${i + 5}`}>
               <a>{v}</a>
             </Link>
           </li>
