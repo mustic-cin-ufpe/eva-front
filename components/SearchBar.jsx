@@ -41,7 +41,14 @@ export default function SearchBar() {
     
     return (
         <SearchBox>
-            <InputSearchBox placeholder="Busca" />
+            <InputSearchBox list="tags" placeholder="Busca" />
+            <datalist id="tags">
+                <option value="Edge"/>
+                <option value="Firefox"/>
+                <option value="Chrome"/>
+                <option value="Opera"/>
+                <option value="Safari"/>
+            </datalist>
         </SearchBox>
     )
 }
