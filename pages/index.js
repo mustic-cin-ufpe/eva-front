@@ -13,10 +13,11 @@ export async function getServerSideProps() {
 
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'D5:D',
+    range: 'B5:D',
   });
 
-  const posts = response.data.values.flat();
+  const posts = response.data.values;
+  //console.log(posts)
   return {
     props: {
       posts,
@@ -26,11 +27,11 @@ export async function getServerSideProps() {
 
 
 export default function Home({ posts }) {
-    const arrayImages = posts
+    const arrayProjectInfo = posts
     return (
       <>
         <Header/>
-        <Mosaic arrayImages={arrayImages}/>
+        <Mosaic arrayProjectInfo={arrayProjectInfo}/>
         <Footer/>
       </>
     )

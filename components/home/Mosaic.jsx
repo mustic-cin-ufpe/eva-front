@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const GridImages = styled.div`
@@ -9,15 +10,24 @@ const GridImages = styled.div`
     height: 100%;
     margin: 30px 50px;
 `
-export default function Mosaic({ arrayImages }) {
-
+export default function Mosaic({ arrayProjectInfo }) {
+    const router = useRouter();
     function getRandomArbitrary() {
         return Math.random() * (1.2 - 0.9) + 0.9;
     }
+    function goTo(e, href){
+        e.preventDefault()
+        router.push(href)
+    }
     return (
         <GridImages>
-            {arrayImages.map((item, index) => (
-                    <img style={{maxHeight: '100%', maxWidth: '100%', aspectRatio: `${getRandomArbitrary()}`}} key={index} src={item}/>
+            {arrayProjectInfo.map((item, index) => (
+                    <img 
+                    style={{maxHeight: '100%', maxWidth: '100%', aspectRatio: `${getRandomArbitrary()}`, cursor: 'pointer'}} 
+                    key={index} 
+                    src={item[2]}
+                    onClick={(e) => goTo(e, `/${item[0].trim().replaceAll(' ', '_')}`)}
+                    />
             ))}
         </GridImages>
     )
