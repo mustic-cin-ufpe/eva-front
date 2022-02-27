@@ -14,8 +14,8 @@ export default function Mosaic({ projectsRendered }) {
                     <img 
                     style={{width: '100%', height: 'auto', cursor: 'pointer', marginBottom: '32px'}} 
                     key={index} 
-                    src={item[2]}
-                    onClick={(e) => goTo(e, `/${item[0].trim().replaceAll(' ', '_')}`)}
+                    src={item[3]}
+                    onClick={(e) => goTo(e, `/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`)}
                     />
             ))}
         </GridImages>

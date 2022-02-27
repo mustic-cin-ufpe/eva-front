@@ -1,12 +1,13 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Art from "../components/projeto/Art";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import Art from "../../components/projeto/Art";
 import { google } from "googleapis";
 import { useEffect } from "react";
 export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
-export async function getServerSideProps() {
-
+export async function getServerSideProps({ query }) {
+  let { id, ArtName } = query
+  id = Number(id) + 4
   const { privateKey } = JSON.parse(process.env.GOOGLE_PRIVATE_KEY || '{ privateKey: null }')
 
   const auth = new google.auth.GoogleAuth({
@@ -25,26 +26,32 @@ export async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'B5:D',
+    range: `A${id}:W`,
     auth: authToken,
   });
-  const posts = response.data.values;
-  console.log(posts)
+  const posts = response.data.values[0];
+  
+  const content = {ArtName: posts[1],
+  Description: posts[2],
+  ImageLink: posts[3],
+  AuthorName: posts[6],
+  Class: posts[15],
+  GithubLink: posts[12],
+  InstagramLink: posts[10],
+  Tags: posts[21],
+  }
   return {
     props: {
-      posts,
+      content,
     },
   };
 }
 
-export default function Project() {
-  useEffect(() => {
-    console.log(window.location.href)
-  }, [])
+export default function Project({ content }) {
   return (
     <>
       <Header/>
-      <Art/>
+      <Art content={content}/>
       <Footer/>
     </>
   )
