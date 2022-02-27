@@ -4,6 +4,30 @@ import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
 import SearchBar from './SearchBar'
 
+export default function Header() {
+    const router = useRouter();
+    
+    function goTo(e, href){
+        e.preventDefault()
+        router.push(href)
+    }
+    return (
+        <HeaderStyle>
+            <Image 
+                onClick={(e) => goTo(e, '/')} 
+                src={'/eva-logo.svg'} 
+                width={297} 
+                height={69}
+            />
+            <CentralizedDiv style={{width: '550px', justifyContent: 'space-around'}}>
+                <HeaderText>Registre seu Projeto</HeaderText>
+                <HeaderText onClick={(e) => goTo(e, 'about')}>Sobre</HeaderText>
+                <SearchBar/>
+            </CentralizedDiv>
+        </HeaderStyle>
+    )
+}
+
 const HeaderStyle = styled.header`
     max-width: 100vw;
     height: 10vh;
@@ -14,6 +38,25 @@ const HeaderStyle = styled.header`
     align-items: center;
     padding-left: 100px;
     padding-right: 100px;
+
+    @media (max-width: 1000px) {
+        padding: 0;
+    }
+    @media (max-width: 700px) {
+        padding: 0;
+        font-size: 0.8rem;
+        span{
+            width: 200px !important;
+            height: 50px !important;
+        }
+    }
+
+    @media (max-width: 400px) {
+        padding: 0;
+        span{
+            display: none !important;
+        }
+    }
 `
 const HeaderText = styled.h1`
     font-family: 'Inter', sans-serif;
@@ -48,23 +91,10 @@ const HeaderText = styled.h1`
         top: -10px;
         height: 2px;
     }
-`
-
-export default function Header() {
-    const router = useRouter();
-    
-    function goTo(e, href){
-        e.preventDefault()
-        router.push(href)
+    @media (max-width: 400px) {
+        font-size: 0.8rem;
     }
-    return (
-        <HeaderStyle>
-            <Image src={'/eva-logo.svg'} width={297} height={69} />
-            <CentralizedDiv style={{width: '550px', justifyContent: 'space-around'}}>
-                <HeaderText>Registre seu Projeto</HeaderText>
-                <HeaderText onClick={(e) => goTo(e, 'about')}>Sobre</HeaderText>
-                <SearchBar/>
-            </CentralizedDiv>
-        </HeaderStyle>
-    )
-}
+    @media (max-width: 700px) {
+        font-size: 0.8rem;
+    }
+`
