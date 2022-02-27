@@ -1,48 +1,73 @@
+import Image from "next/image"
 import styled from "styled-components"
 import Footer from "../Footer"
 
 
 export default function Art(){
     return(
-    <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-        <ArtTitle>
-            Nome da Obra
-        </ArtTitle> 
-        <ImageSize>
-            <img 
-            src={'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=445&q=80'} 
-            width = {784} height = {784}
-            />
-        </ImageSize>
-        <LineStyle/>
-        <AuthorName>
-            Nome do Autor
-        </AuthorName>
-        <ArtName>
-            Nome da Obra
-        </ArtName>
+    <div style={{display: "flex", flexDirection: 'column' , alignItems: "center", justifyContent: "center", marginBottom: 10}}>
+        <ArtTitle>Nome da Obra</ArtTitle> 
+        <img 
+        src={'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=445&q=80'} 
+        width = {784} height = {784}
+        />
         <ArtDescription>
-        Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros)
+            <LineStyle/>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                <div>
+                    <AuthorName>
+                        Nome do Autor
+                    </AuthorName>
+                    <ArtName>
+                        Nome da Obra
+                    </ArtName>
+                </div>
+                <div style={{display: 'flex'}}>
+                    <SocialBox style={{borderRight: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0}}>
+                        <Image src={'/githubIcon.svg'} width={25} height={25}/>
+                    </SocialBox>
+                    <SocialBox style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}}>
+                        <Image src={'/instagramIcon.svg'} width={25} height={25}/>
+                    </SocialBox>
+                </div>
+            </div>
+            
+            <TextArtDescription>
+            Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros)
+            </TextArtDescription>
+            <Members>
+                Outros Integrantes
+            </Members>
+
+            <ListMembers>
+            <li>Membro 1</li>
+            <li>Membro 2</li>
+            <li>Membro 3</li>
+            <li>Membro 4</li>
+            </ListMembers>
+
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <BoxTag>
+                    <InfoTag>#tag1</InfoTag>
+                </BoxTag>
+                <BoxTag>
+                    <InfoTag>#tag2</InfoTag>
+                </BoxTag>
+                <BoxTag>
+                    <InfoTag>#tag3</InfoTag>
+                </BoxTag>
+                <BoxTag>
+                    <InfoTag>#tag4</InfoTag>
+                </BoxTag>
+            </div>
         </ArtDescription>
-        <Members>
-            Outros Integrantes
-        </Members>
-
-        <ListMembers>
-        <li>Membro 1</li>
-        <li>Membro 2</li>
-        <li>Membro 3</li>
-        <li>Membro 4</li>
-        </ListMembers>
-
-        <BoxTag>
-            <p>
-            #tag1
-            </p>
-        </BoxTag>
     </div>
 )
 }
+
+const ArtDescription = styled.div`
+`
+
 const ArtTitle = styled.h1`
     display: grid;
     width: 858px;
@@ -61,28 +86,16 @@ const ArtTitle = styled.h1`
 
     color: #000000;
 `
-const ImageSize = styled.image`
-    position: absolute;
-    width: 784px;
-    height: 784px;
-    left: 328px;
-    top: 259px;
-`
+
 const LineStyle = styled.hr`
-    position: absolute;
     width: 640px;
     height: 0px;
-    left: 400px;
-    top: 1080px;
 
     border: 2px solid #000000;
 `
 const AuthorName = styled.p `
-    position: absolute;
     width: 159px;
     height: 19px;
-    left: 400px;
-    top: 1109px;
 
     font-family: Inter;
     font-style: normal;
@@ -95,11 +108,8 @@ const AuthorName = styled.p `
     color: #000000;
 `
 const ArtName = styled.p`
-    position: absolute;
     width: 159px;
     height: 19px;
-    left: 400px;
-    top: 1136px;
 
     font-family: Inter;
     font-style: normal;
@@ -110,27 +120,24 @@ const ArtName = styled.p`
     color: #000000;
 `
 const SocialBox = styled.div`
-    position: absolute;
-    width: 109px;
+    width: 55px;
     height: 45px;
-    right: 399px;
-    top: 1110px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #FFFFFF;
     border: 1px solid #EAEAEA;
     box-sizing: border-box;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
+    
 `
-const ArtDescription = styled.p`
+const TextArtDescription = styled.p`
     /* Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros */
 
 
-    position: absolute;
     width: 640px;
     height: 102px;
-    left: 400px;
-    top: 1211px;
 
     font-family: Inter;
     font-style: normal;
@@ -143,11 +150,8 @@ const ArtDescription = styled.p`
     color: #000000;
 `
 const Members = styled.h3`
-    position: absolute;
     width: 201px;
     height: 35px;
-    left: 400px;
-    top: 1344px;
 
     font-family: Inter;
     font-style: normal;
@@ -160,11 +164,8 @@ const Members = styled.h3`
     color: #000000;
 `
 const ListMembers = styled.ul`
-    position: absolute;
     width: 146px;
     height: 136px;
-    left: 400px;
-    top: 1399px;
 
     font-family: Inter;
     font-style: normal;
@@ -177,24 +178,21 @@ const ListMembers = styled.ul`
     color: #000000;
 `
 const BoxTag = styled.div`
-    position: absolute;
     width: 80px;
     height: 40px;
-    left: 500px;
-    top: 1575px;
-    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #EAEAEA;
     border-radius: 6px;
+    margin: 15px;
 `
 const InfoTag = styled.p`
-    position: absolute;
     width: 53px;
     height: 34px;
-    left: 513px;
-    top: 1578px;
     font-family: Inter;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 500;
     font-size: 20px;
     line-height: 34px;
     /* identical to box height, or 34px */
