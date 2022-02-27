@@ -104,22 +104,22 @@ const Description = styled.p`
     animation: showErrorDescription 5s ease-in-out;
     @keyframes showErrorDescription {
         0%{ 
-            font-size: 1.5rem;
+            font-size: 1rem;
             opacity: 0;
             z-index: 999;
         }
         50%{
-            font-size: 1.5rem;
+            font-size: 1rem;
             opacity: 100%;
             z-index: 999;
         }
         70%{
-            font-size: 1.5rem;
+            font-size: 1rem;
             opacity: 100%;
             z-index: 999;
         }
         100%{
-            font-size: 1.5rem;
+            font-size: 1rem;
             opacity: 0;
         }
         
