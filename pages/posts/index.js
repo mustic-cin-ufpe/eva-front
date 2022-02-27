@@ -13,7 +13,6 @@ export async function getServerSideProps({ query }) {
   });
 
   const posts = response.data.values.flat();
-  console.log(response.data)
   return {
     props: {
       posts,
