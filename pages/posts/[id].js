@@ -17,9 +17,11 @@ export async function getServerSideProps({ query }) {
       spreadsheetId: process.env.SHEET_ID,
       range,
     });
+    console.log(response.data.values)
     // Result
 
     const [title, content] = response.data.values[0];
+    console.log(title, content)
 
     return { 
         props: {

@@ -4,6 +4,7 @@ import Link from 'next/link';
 export async function getServerSideProps({ query }) {
 
   const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
+
   const sheets = google.sheets({ version: 'v4', auth });
 
   const response = await sheets.spreadsheets.values.get({
@@ -12,6 +13,7 @@ export async function getServerSideProps({ query }) {
   });
 
   const posts = response.data.values.flat();
+  console.log(response.data)
   return {
     props: {
       posts,
