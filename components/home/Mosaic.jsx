@@ -1,25 +1,55 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const GridImages = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(400px, 400px);
-    grid-gap: 32px;
-    max-width: 100vw;
-    height: 100%;
-    margin: 30px 50px;
-`
-export default function Mosaic() {
-    const arrayImages = ['https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200', 'https://lh3.googleusercontent.com/Y3Wlgrx0hey6cXIKBIC0hSm-qKmm-NdDmlr1t2iBIp8Cox6sC-NjIlb9Ejem9S9s=s1200']
-    
-    function getRandomArbitrary() {
-        return Math.random() * (1.2 - 0.9) + 0.9;
+export default function Mosaic({ projectsRendered }) {
+    const router = useRouter();
+    function goTo(e, href){
+        e.preventDefault()
+        router.push(href)
     }
     return (
         <GridImages>
-            {arrayImages.map((item, index) => (
-                    <img style={{maxHeight: '100%', maxWidth: '100%', aspectRatio: `${getRandomArbitrary()}`}} key={index} src={item}/>
+            {projectsRendered.map((item, index) => (
+                    <img 
+                    style={{width: '100%', height: 'auto', cursor: 'pointer', marginBottom: '32px'}} 
+                    key={`MosaicImage ${index}`}
+                    src={item[3]}
+                    onClick={(e) => goTo(e, `/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`)}
+                    />
             ))}
         </GridImages>
     )
 }
+
+const GridImages = styled.section`
+    line-height: 0;
+    -webkit-column-count: 5;
+    -webkit-column-gap:   32px;
+    -moz-column-count:    5;
+    -moz-column-gap:      32px;
+    column-count:         5;
+    column-gap:           32px;
+    margin: 30px 50px;
+    
+   @media (max-width: 1200px) {
+        -moz-column-count:    4;
+        -webkit-column-count: 4;
+        column-count:         4;
+    }
+    @media (max-width: 1000px) {
+        -moz-column-count:    3;
+        -webkit-column-count: 3;
+        column-count:         3;
+    }
+    @media (max-width: 800px) {
+        -moz-column-count:    2;
+        -webkit-column-count: 2;
+        column-count:         2;
+    }
+    @media (max-width: 400px) {
+        -moz-column-count:    1;
+        -webkit-column-count: 1;
+        column-count:         1;
+    }
+`
