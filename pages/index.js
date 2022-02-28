@@ -58,7 +58,7 @@ export default function Home({ posts }) {
     }
     return (
       <>
-        <Header/>
+        <Header setIsError={setIsError} arrayProjectInfo={arrayProjectInfo} setProjectsRendered={setProjectsRendered}/>
         <Mosaic projectsRendered={projectsRendered}/>
         <CentralizedDiv>
           <Button onClick={() => loadMoreProjects()} disabled={isError}>mais projetos</Button>
