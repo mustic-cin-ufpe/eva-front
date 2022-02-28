@@ -1,10 +1,22 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export default function SearchBar() {
+export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIsError }) {
+    const [searchText, setSearchText] = useState('')
+    useEffect(() => {
+        if (searchText != ''){
+            setProjectsRendered(arrayProjectInfo.filter((value) => {
+                return value[1].includes(searchText)
+            }))
+        }else{
+            setProjectsRendered(arrayProjectInfo.slice(0, 16))
+            setIsError(false)
+        }
+    }, [searchText])
     
     return (
         <SearchBox>
-            <InputSearchBox list="tags" placeholder="Busca" />
+            <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
             <datalist id="tags">
                 <option value="Edge"/>
                 <option value="Firefox"/>

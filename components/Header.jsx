@@ -1,28 +1,37 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
 import SearchBar from './SearchBar'
 
-export default function Header() {
+export default function Header({ arrayProjectInfo, setProjectsRendered, setIsError }) {
     const router = useRouter();
+    const arrayLogos = ['/eva-logo.svg', '/eva-logo(4).svg', '/eva-logo(4).svg']
+    const [isHome, setIsHome] = useState(false)
+    useEffect(() => {
+        window.location.pathname == '/' ? setIsHome(true) : setIsHome(false)
+    })
     
     function goTo(e, href){
         e.preventDefault()
         router.push(href)
     }
+    function getRandomArbitrary(min, max) {
+        return parseInt(Math.random() * (max - min) + min);
+    }
     return (
         <HeaderStyle>
             <Image 
                 onClick={(e) => goTo(e, '/')} 
-                src={'/eva-logo.svg'} 
-                width={297} 
+                src={`${arrayLogos[getRandomArbitrary(0, 2)]}`} 
+                width={297}
                 height={69}
             />
             <CentralizedDiv style={{width: '550px', justifyContent: 'space-around'}}>
                 <HeaderText>Registre seu Projeto</HeaderText>
                 <HeaderText onClick={(e) => goTo(e, 'about')}>Sobre</HeaderText>
-                <SearchBar/>
+                {isHome ? <SearchBar setIsError={setIsError} arrayProjectInfo={arrayProjectInfo} setProjectsRendered={setProjectsRendered}/> : ''}
             </CentralizedDiv>
         </HeaderStyle>
     )
@@ -39,6 +48,9 @@ const HeaderStyle = styled.header`
     padding-left: 100px;
     padding-right: 100px;
 
+    span{
+        cursor: pointer !important;
+    }
     @media (max-width: 1000px) {
         padding: 0;
     }
