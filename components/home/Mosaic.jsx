@@ -11,12 +11,13 @@ export default function Mosaic({ projectsRendered }) {
     return (
         <GridImages>
             {projectsRendered.map((item, index) => (
-                    <img 
-                    style={{width: '100%', height: 'auto', cursor: 'pointer', marginBottom: '32px'}} 
-                    key={index} 
-                    src={item[3]}
-                    onClick={(e) => goTo(e, `/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`)}
-                    />
+                    <a key={`MosaicImage ${index}`} href={`/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`}>
+                        <img 
+                        style={{width: '100%', height: 'auto', cursor: 'pointer', marginBottom: '32px'}} 
+                        src={item[3]}
+                        onClick={(e) => goTo(e, `/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`)}
+                        />
+                    </a>
             ))}
         </GridImages>
     )

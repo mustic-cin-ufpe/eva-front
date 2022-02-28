@@ -7,13 +7,11 @@ export default function Art({ content }){
     const {ArtName, Description, ImageLink, AuthorName, Class, GithubLink, InstagramLink, Tags} = content;
     const arrayAuthorName = AuthorName.split(',')
     const arrayTags = Tags.split(',')
-    console.log(arrayAuthorName)
     return(
     <div style={{display: "flex", flexDirection: 'column' , alignItems: "center", justifyContent: "center", marginBottom: 10}}>
         <ArtTitle>{ArtName}</ArtTitle> 
-        <img 
-        src={ImageLink} 
-        width = {784} height = {784}
+        <Teste
+        src={ImageLink}
         />
         <ArtDescription>
             <LineStyle/>
@@ -53,8 +51,8 @@ export default function Art({ content }){
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 {arrayTags.map((item, index) => {
                     return (
-                    <BoxTag>
-                        <InfoTag key={index}>{item.trim()}</InfoTag>
+                    <BoxTag key={`Art ${index}`}>
+                        <InfoTag>{item.trim()}</InfoTag>
                     </BoxTag>
                     )
                 })}
@@ -66,38 +64,45 @@ export default function Art({ content }){
 )
 }
 
+const Teste = styled.img`
+    width: 784px;
+    height: 784px;
+
+    @media (max-width: 900px) {
+        width: 80vw;
+        height: 80vw;
+    }
+`
+
 const ArtDescription = styled.div`
+    height: 100%;
+    width: 650px;
+
+    @media (max-width: 900px) {
+        width: 60vw;
+    }
 `
 
 const ArtTitle = styled.h1`
     display: grid;
-    width: 858px;
-    height: 48px;
     left: 291px;
     top: 178px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
     font-size: 48px;
     line-height: 48px;
-    /* identical to box height, or 48px */
-
     text-align: center;
 
     color: #000000;
 `
 
 const LineStyle = styled.hr`
-    width: 640px;
-    height: 0px;
+    width: 100%;
 
     border: 2px solid #000000;
 `
 const Author = styled.p `
-    width: 159px;
-    height: 19px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -109,9 +114,6 @@ const Author = styled.p `
     color: #000000;
 `
 const ClassName = styled.p`
-    width: 159px;
-    height: 19px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -134,48 +136,27 @@ const SocialBox = styled.a`
     
 `
 const TextArtDescription = styled.p`
-    /* Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros */
-
-
-    width: 640px;
-    height: 102px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 170%;
-    /* or 34px */
-
-
     color: #000000;
 `
 const Members = styled.h3`
-    width: 201px;
-    height: 35px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 160%;
-    /* or 35px */
-
-
     color: #000000;
 `
 const ListMembers = styled.ul`
-    width: 146px;
-    height: 136px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 170%;
-    /* or 34px */
-
-
     color: #000000;
 `
 const BoxTag = styled.div`
@@ -189,15 +170,10 @@ const BoxTag = styled.div`
     margin: 15px;
 `
 const InfoTag = styled.p`
-    width: 53px;
-    height: 34px;
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 34px;
-    /* identical to box height, or 34px */
-
-
     color: #000000;
 `

@@ -39,6 +39,9 @@ const HeaderStyle = styled.header`
     padding-left: 100px;
     padding-right: 100px;
 
+    span{
+        cursor: pointer !important;
+    }
     @media (max-width: 1000px) {
         padding: 0;
     }
