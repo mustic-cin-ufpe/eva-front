@@ -6,7 +6,7 @@ export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIs
     useEffect(() => {
         if (searchText != ''){
             setProjectsRendered(arrayProjectInfo.filter((value) => {
-                return value[1].includes(searchText)
+                if(value[1]) return value[1].includes(searchText)
             }))
         }else{
             setProjectsRendered(arrayProjectInfo.slice(0, 16))
@@ -18,11 +18,11 @@ export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIs
         <SearchBox>
             <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
             <datalist id="tags">
-                <option value="Edge"/>
-                <option value="Firefox"/>
-                <option value="Chrome"/>
-                <option value="Opera"/>
-                <option value="Safari"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
             </datalist>
         </SearchBox>
     )
