@@ -18,11 +18,11 @@ export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIs
         <SearchBox>
             <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
             <datalist id="tags">
-                <option value="Edge"/>
-                <option value="Firefox"/>
-                <option value="Chrome"/>
-                <option value="Opera"/>
-                <option value="Safari"/>
+                <option value="Lorem ipsum 1"/>
+                <option value="Lorem ipsum 2"/>
+                <option value="Lorem ipsum 3"/>
+                <option value="Lorem ipsum 4"/>
+                <option value="Lorem ipsum 5"/>
             </datalist>
         </SearchBox>
     )
