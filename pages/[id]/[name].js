@@ -31,14 +31,17 @@ export async function getServerSideProps({ query }) {
   });
   const posts = response.data.values[0];
   
-  const content = {ArtName: posts[1],
-  Description: posts[2],
-  ImageLink: posts[3],
-  AuthorName: posts[6],
-  Class: posts[15],
-  GithubLink: posts[12],
-  InstagramLink: posts[10],
-  Tags: posts[21],
+  const content = {
+    ArtName: posts[1],
+    Description: posts[2],
+    ImageLink: posts[3],
+    AuthorName: posts[6],
+    Class: posts[15],
+    GithubLink: posts[12],
+    InstagramLink: posts[10],
+    Tags: posts[21],
+    Iframe: posts[4] ? posts[4] : null,
+    IframeLink: posts[5] ? posts[5] : null,
   }
   return {
     props: {

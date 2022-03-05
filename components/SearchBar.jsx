@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIsError }) {
+export default function SearchBar({ arrayProjectInfo, setProjectsRendered, isError }) {
     const [searchText, setSearchText] = useState('')
     useEffect(() => {
         if (searchText != ''){
@@ -10,7 +10,7 @@ export default function SearchBar({ arrayProjectInfo, setProjectsRendered, setIs
             }))
         }else{
             setProjectsRendered(arrayProjectInfo.slice(0, 16))
-            setIsError(false)
+            isError = false
         }
     }, [searchText])
     
@@ -44,7 +44,7 @@ const SearchBox = styled.div`
         z-index: 999;
         left: 5px;
         position: absolute;
-        top: 25%;
+        top: 24%;
     }
     @media (max-width: 400px) {
         width: 125px;
@@ -57,6 +57,7 @@ const SearchBox = styled.div`
 const InputSearchBox = styled.input`
     position: absolute;
     left: 30px;
+    top: 0;
     //250px - 30px
     width: 220px;
     height: 100%;

@@ -21,7 +21,7 @@ export default function Header({ arrayProjectInfo, setProjectsRendered, setIsErr
         return parseInt(Math.random() * (max - min) + min);
     }
     return (
-        <HeaderStyle>
+        <HeaderStyle className='animate__animated animate__slideInDown'>
             <Image 
                 onClick={(e) => goTo(e, '/')} 
                 src={`${arrayLogos[getRandomArbitrary(0, 2)]}`} 
@@ -39,7 +39,7 @@ export default function Header({ arrayProjectInfo, setProjectsRendered, setIsErr
 
 const HeaderStyle = styled.header`
     max-width: 100vw;
-    height: 10vh;
+    height: 8vh;
     background-color: white;
     box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
     display: flex;

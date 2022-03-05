@@ -15,6 +15,7 @@ export default function Mosaic({ projectsRendered }) {
                     style={{width: '100%', height: 'auto', cursor: 'pointer', marginBottom: '32px'}} 
                     key={`MosaicImage ${index}`}
                     src={item[3]}
+                    className='animate__animated animate__fadeInUp animate__slow'
                     onClick={(e) => goTo(e, `/${item[0].trim()}/${item[1].trim().replaceAll(' ', '_')}`)}
                     />
             ))}

@@ -44,24 +44,37 @@ export async function getServerSideProps() {
 
 
 export default function Home({ posts }) {
-    const arrayProjectInfo = posts
+    const arrayProjectInfo = posts.filter((value) => {
+      if(value[1]) return value
+    })
     const [projectsRendered, setProjectsRendered] = useState(arrayProjectInfo.slice(0, 16));
     const [isError, setIsError] = useState(false)
     function loadMoreProjects(){
       const lengthOfActualProjects = projectsRendered.length
       if (lengthOfActualProjects < arrayProjectInfo.length){
         const newProjectsRendered = arrayProjectInfo.slice(lengthOfActualProjects, lengthOfActualProjects + 8)
-        setProjectsRendered(oldArray => [...oldArray, ...newProjectsRendered]) 
+        setProjectsRendered(oldArray => [...oldArray, ...newProjectsRendered]);
+
       }else{
         setIsError(true)
       }
     }
+
+    const handleScrool = (e) => {
+      if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight){
+        //loadMoreProjects()
+      }
+    }
+    useEffect(() => {
+      //loadMoreProjects();
+      window.addEventListener('scroll', handleScrool)
+    })
     return (
       <>
         <Header setIsError={setIsError} arrayProjectInfo={arrayProjectInfo} setProjectsRendered={setProjectsRendered}/>
         <Mosaic projectsRendered={projectsRendered}/>
         <CentralizedDiv>
-          <Button onClick={() => loadMoreProjects()} disabled={isError}>mais projetos</Button>
+          <Button className='animate__animated animate__fadeIn' onClick={() => loadMoreProjects()} disabled={isError}>mais projetos</Button>
         </CentralizedDiv>
         {isError ? 
         <ErrorPopup errorTitle={'Você chegou ao fim!'} errorDescription={'Infelizmente não temos mais obras para mostrar :('}/> 

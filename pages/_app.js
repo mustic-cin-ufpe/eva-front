@@ -1,4 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import 'animate.css';
 
 const GlobalStyle = createGlobalStyle`
   body {

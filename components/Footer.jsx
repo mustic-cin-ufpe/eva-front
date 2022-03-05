@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export default function Footer() {
     return (
-        <FooterStyle>
+        <FooterStyle className="animate__animated animate__slideInUp">
             <Image src={'/eva-logo-footer.svg'} width={150} height={50} />
         </FooterStyle>
     )
