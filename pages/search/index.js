@@ -1,13 +1,12 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Art from "../../components/projeto/Art";
 import { google } from "googleapis";
-import { useEffect } from "react";
+import { withRouter } from 'next/router';
+import { useEffect, useState } from 'react'
+import Mosaic from "../../components/home/Mosaic";
+
 export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
-export async function getServerSideProps({ query }) {
-  let { id, ArtName } = query
-  id = Number(id) + 4
+export async function getServerSideProps() {
+
   const { privateKey } = JSON.parse(process.env.GOOGLE_PRIVATE_KEY || '{ privateKey: null }')
 
   const auth = new google.auth.GoogleAuth({
@@ -26,36 +25,32 @@ export async function getServerSideProps({ query }) {
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: `A${id}:W`,
+    range: 'A5:D',
     auth: authToken,
   });
-  const posts = response.data.values[0];
-  
-  const content = {
-    ArtName: posts[1],
-    Description: posts[2],
-    ImageLink: posts[3],
-    AuthorName: posts[6],
-    Class: posts[15],
-    GithubLink: posts[12],
-    InstagramLink: posts[10],
-    Tags: posts[21],
-    Iframe: posts[4] ? posts[4] : null,
-    IframeLink: posts[5] ? posts[5] : null,
-  }
+
+  const posts = response.data.values;
   return {
     props: {
-      content,
+      posts,
     },
   };
 }
 
-export default function Project({ content }) {
+function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }) {
+  const arrayProjectInfo = posts.filter((value) => {
+    if(value[1]) return value
+  })
+  useEffect(() => {
+      setProjectsRendered(arrayProjectInfo.filter((value) => {
+          if(value[1]) return value[1].includes(searchText)
+      }))
+  }, [searchText])
+  
+
   return (
-    <>
-      <Header/>
-      <Art content={content}/>
-      <Footer/>
-    </>
+      <Mosaic projectsRendered={projectsRendered}/>
   )
 }
+
+export default withRouter(SearchPage)

@@ -1,21 +1,11 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Image from 'next/image';
 
-export default function SearchBar({ arrayProjectInfo, setProjectsRendered, isError }) {
-    const [searchText, setSearchText] = useState('')
-    useEffect(() => {
-        if (searchText != ''){
-            setProjectsRendered(arrayProjectInfo.filter((value) => {
-                if(value[1]) return value[1].includes(searchText)
-            }))
-        }else{
-            setProjectsRendered(arrayProjectInfo.slice(0, 16))
-            isError = false
-        }
-    }, [searchText])
+export default function SearchBar({ setSearchText }) {
     
     return (
         <SearchBox>
+            <SearchIcon src={'/searchIcon.svg'}/>
             <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
             <datalist id="tags">
                 <option value="Lorem Ipsum"/>
@@ -28,6 +18,21 @@ export default function SearchBar({ arrayProjectInfo, setProjectsRendered, isErr
     )
 }
 
+const SearchIcon = styled.img`
+    width: 24px;
+    height: 24px;
+    z-index: 999;
+    left: 5px;
+    position: absolute;
+    top: 24%;
+
+    @media (max-width: 630px) {
+        top: 20%;
+        width: 15px;
+        height: 15px;
+        
+    }
+`
 const SearchBox = styled.div`
     width: 250px;
     height: 45px;
@@ -36,18 +41,10 @@ const SearchBox = styled.div`
     border: none;
     padding-top: 1px;
     background-color: #E7EDF1;
-    ::before{
-        content: '';
-        width: 24px;
-        height: 24px;
-        background-image: url('searchIcon.svg');
-        z-index: 999;
-        left: 5px;
-        position: absolute;
-        top: 24%;
-    }
-    @media (max-width: 400px) {
-        width: 125px;
+    
+    @media (max-width: 630px) {
+        width: 50% !important;
+        height: 23px;
     }
 
     @media (max-width: 700px) {
@@ -73,8 +70,10 @@ const InputSearchBox = styled.input`
         color: black;
     }
     
-    @media (max-width: 400px) {
-        width: 95px;
+    @media (max-width: 630px) {
+        width: 160px !important;
+        left: 25px;
+        height: 23px;
     }
 
     @media (max-width: 700px) {
