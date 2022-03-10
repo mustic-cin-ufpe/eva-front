@@ -1,8 +1,8 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Art from "../components/projeto/Art";
 import { google } from "googleapis";
-import { useEffect } from "react";
+import { withRouter } from 'next/router';
+import { useEffect, useState } from 'react'
+import Mosaic from "../../components/home/Mosaic";
+
 export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 export async function getServerSideProps() {
@@ -25,11 +25,11 @@ export async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'B5:D',
+    range: 'A5:D',
     auth: authToken,
   });
+
   const posts = response.data.values;
-  console.log(posts)
   return {
     props: {
       posts,
@@ -37,15 +37,20 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Project() {
+function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }) {
+  const arrayProjectInfo = posts.filter((value) => {
+    if(value[1]) return value
+  })
   useEffect(() => {
-    console.log(window.location.href)
-  }, [])
+      setProjectsRendered(arrayProjectInfo.filter((value) => {
+          if(value[1]) return value[1].includes(searchText)
+      }))
+  }, [searchText])
+  
+
   return (
-    <>
-      <Header/>
-      <Art/>
-      <Footer/>
-    </>
+      <Mosaic projectsRendered={projectsRendered}/>
   )
 }
+
+export default withRouter(SearchPage)

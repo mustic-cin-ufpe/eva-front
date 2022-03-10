@@ -1,102 +1,125 @@
 import Image from "next/image"
 import styled from "styled-components"
 import Footer from "../Footer"
+import TextLink from "../TextLink";
 
 
-export default function Art(){
+export default function Art({ content }){
+    const {ArtName, Description, ImageLink, AuthorName, Class, GithubLink, InstagramLink, Tags, Iframe, IframeLink} = content;
+    const arrayAuthorName = AuthorName.split(',')
+    const arrayTags = Tags.split(',')
     return(
     <div style={{display: "flex", flexDirection: 'column' , alignItems: "center", justifyContent: "center", marginBottom: 10}}>
-        <ArtTitle>Nome da Obra</ArtTitle> 
-        <img 
-        src={'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=445&q=80'} 
-        width = {784} height = {784}
+        <ArtTitle>{ArtName}</ArtTitle> 
+        {
+            Iframe ? <IframeComponent src={Iframe} title={ArtName}/> : <MainImage
+        src={ImageLink}
         />
+        }
         <ArtDescription>
             <LineStyle/>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div>
-                    <AuthorName>
-                        Nome do Autor
-                    </AuthorName>
-                    <ArtName>
-                        Nome da Obra
-                    </ArtName>
+                    <Author>
+                        {arrayAuthorName[0]}
+                    </Author>
+                    <ClassName>
+                        {Class}
+                    </ClassName>
                 </div>
                 <div style={{display: 'flex'}}>
-                    <SocialBox style={{borderRight: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0}}>
-                        <Image src={'/githubIcon.svg'} width={25} height={25}/>
+                    <SocialBox style={{borderRight: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0}} href={`${GithubLink}`} target="_blank">
+                        <Image src={'/githubIcon.svg'} width={25} height={25} />
                     </SocialBox>
-                    <SocialBox style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}}>
-                        <Image src={'/instagramIcon.svg'} width={25} height={25}/>
+                    <SocialBox style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}} href={`${InstagramLink}`} target="_blank">
+                        <Image src={'/instagramIcon.svg'} width={25} height={25} />
                     </SocialBox>
                 </div>
             </div>
             
             <TextArtDescription>
-            Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros)
+            {Description}
             </TextArtDescription>
-            <Members>
-                Outros Integrantes
-            </Members>
 
-            <ListMembers>
-            <li>Membro 1</li>
-            <li>Membro 2</li>
-            <li>Membro 3</li>
-            <li>Membro 4</li>
-            </ListMembers>
+            {IframeLink ? 
+            <TextLink href={IframeLink} target="_blank">Saiba mais sobre a obra!</TextLink> 
+            : ''}
+            
+            {arrayAuthorName.length == 1 ? '' : 
+                <>
+                    <Members>
+                    Outros Integrantes
+                    </Members>
+                    <ListMembers>
+                        {arrayAuthorName.slice(1, arrayAuthorName.length).map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })}
+                        
+                    </ListMembers>
+                </>
+            }
+            
 
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                <BoxTag>
-                    <InfoTag>#tag1</InfoTag>
-                </BoxTag>
-                <BoxTag>
-                    <InfoTag>#tag2</InfoTag>
-                </BoxTag>
-                <BoxTag>
-                    <InfoTag>#tag3</InfoTag>
-                </BoxTag>
-                <BoxTag>
-                    <InfoTag>#tag4</InfoTag>
-                </BoxTag>
+                {arrayTags.map((item, index) => {
+                    return (
+                    <BoxTag key={`Art ${index}`}>
+                        <InfoTag>{item.trim()}</InfoTag>
+                    </BoxTag>
+                    )
+                })}
             </div>
         </ArtDescription>
     </div>
 )
 }
 
+const MainImage = styled.img`
+    width: 784px;
+    height: 784px;
+
+    @media (max-width: 900px) {
+        width: 80vw;
+        height: 80vw;
+    }
+`
+
+const IframeComponent = styled.iframe`
+    width: 95vw;
+    height: 60vh;
+    border: none;
+    box-shadow: 0px -5px 25px rgba(0, 0, 0, 0.15);
+`
+
 const ArtDescription = styled.div`
+    height: 100%;
+    width: 650px;
+
+    @media (max-width: 900px) {
+        width: 60vw;
+    }
 `
 
 const ArtTitle = styled.h1`
     display: grid;
-    width: 858px;
-    height: 48px;
     left: 291px;
     top: 178px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
     font-size: 48px;
     line-height: 48px;
-    /* identical to box height, or 48px */
-
     text-align: center;
 
     color: #000000;
 `
 
 const LineStyle = styled.hr`
-    width: 640px;
-    height: 0px;
+    width: 100%;
 
     border: 2px solid #000000;
 `
-const AuthorName = styled.p `
-    width: 159px;
-    height: 19px;
-
+const Author = styled.p `
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -107,10 +130,7 @@ const AuthorName = styled.p `
 
     color: #000000;
 `
-const ArtName = styled.p`
-    width: 159px;
-    height: 19px;
-
+const ClassName = styled.p`
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
@@ -119,7 +139,7 @@ const ArtName = styled.p`
 
     color: #000000;
 `
-const SocialBox = styled.div`
+const SocialBox = styled.a`
     width: 55px;
     height: 45px;
     display: flex;
@@ -133,48 +153,27 @@ const SocialBox = styled.div`
     
 `
 const TextArtDescription = styled.p`
-    /* Descrição da obra, dependendo da obra a forma como é mostrada é modificado, caso seja varias imagens pode ter uma galeria (com um carrossel de imagens, iframe, audiio, entre outros */
-
-
-    width: 640px;
-    height: 102px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 170%;
-    /* or 34px */
-
-
     color: #000000;
 `
 const Members = styled.h3`
-    width: 201px;
-    height: 35px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 160%;
-    /* or 35px */
-
-
     color: #000000;
 `
 const ListMembers = styled.ul`
-    width: 146px;
-    height: 136px;
-
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 170%;
-    /* or 34px */
-
-
     color: #000000;
 `
 const BoxTag = styled.div`
@@ -188,15 +187,10 @@ const BoxTag = styled.div`
     margin: 15px;
 `
 const InfoTag = styled.p`
-    width: 53px;
-    height: 34px;
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
     line-height: 34px;
-    /* identical to box height, or 34px */
-
-
     color: #000000;
 `

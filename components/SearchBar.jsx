@@ -1,5 +1,38 @@
 import styled from "styled-components";
+import Image from 'next/image';
 
+export default function SearchBar({ setSearchText }) {
+    
+    return (
+        <SearchBox>
+            <SearchIcon src={'/searchIcon.svg'}/>
+            <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
+            <datalist id="tags">
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+                <option value="Lorem Ipsum"/>
+            </datalist>
+        </SearchBox>
+    )
+}
+
+const SearchIcon = styled.img`
+    width: 24px;
+    height: 24px;
+    z-index: 999;
+    left: 5px;
+    position: absolute;
+    top: 24%;
+
+    @media (max-width: 630px) {
+        top: 20%;
+        width: 15px;
+        height: 15px;
+        
+    }
+`
 const SearchBox = styled.div`
     width: 250px;
     height: 45px;
@@ -8,21 +41,22 @@ const SearchBox = styled.div`
     border: none;
     padding-top: 1px;
     background-color: #E7EDF1;
-    ::before{
-        content: '';
-        width: 24px;
-        height: 24px;
-        background-image: url('searchIcon.svg');
-        z-index: 999;
-        left: 5px;
-        position: absolute;
-        top: 25%;
+    
+    @media (max-width: 630px) {
+        width: 50% !important;
+        height: 23px;
+    }
+
+    @media (max-width: 700px) {
+        width: 150px;
     }
 `
 const InputSearchBox = styled.input`
     position: absolute;
     left: 30px;
-    width: 100%;
+    top: 0;
+    //250px - 30px
+    width: 220px;
     height: 100%;
     padding: 0;
     background-color: #E7EDF1;
@@ -36,19 +70,14 @@ const InputSearchBox = styled.input`
         color: black;
     }
     
-`
-export default function SearchBar() {
+    @media (max-width: 630px) {
+        width: 160px !important;
+        left: 25px;
+        height: 23px;
+    }
+
+    @media (max-width: 700px) {
+        width: 120px;
+    }
     
-    return (
-        <SearchBox>
-            <InputSearchBox list="tags" placeholder="Busca" />
-            <datalist id="tags">
-                <option value="Edge"/>
-                <option value="Firefox"/>
-                <option value="Chrome"/>
-                <option value="Opera"/>
-                <option value="Safari"/>
-            </datalist>
-        </SearchBox>
-    )
-}
+`
