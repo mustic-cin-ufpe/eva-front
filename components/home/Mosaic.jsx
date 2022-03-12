@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useMemo } from "react/cjs/react.production.min";
 import styled from "styled-components";
 
 export default function Mosaic({ projectsRendered }) {
@@ -25,6 +24,7 @@ export default function Mosaic({ projectsRendered }) {
             const secondColumn = projectsRendered.slice(lengthOfProjectsRendered/3, (2 * lengthOfProjectsRendered)/3)
             const thirdColumn = projectsRendered.slice((2 * lengthOfProjectsRendered)/3 , lengthOfProjectsRendered)
             setArrayProjectsRendered([firstColumn, secondColumn, thirdColumn])
+            console.log(arrayProjectsRendered)
         } else if (pageWidth <= 640){
             //2
             const firstColumn = projectsRendered.slice(0, lengthOfProjectsRendered/2)
