@@ -25,7 +25,7 @@ export async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'A5:D',
+    range: 'dev!A2:D',
     auth: authToken,
   });
 
@@ -43,7 +43,7 @@ function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }
   })
   useEffect(() => {
       setProjectsRendered(arrayProjectInfo.filter((value) => {
-          if(value[1]) return value[1].includes(searchText)
+          if(value[1]) return value[1].toLowerCase().includes(searchText.toLowerCase())
       }))
   }, [searchText])
   
