@@ -57,9 +57,9 @@ export default function Home({ posts, setProjectsRendered, projectsRendered}) {
 
   function loadMoreProjects(){
     if (counter < arrayProjectInfo.length){
-      const newProjectsRendered = arrayProjectInfo.slice(counter, counter + 8)
+      const newProjectsRendered = arrayProjectInfo.slice(counter, counter + 15)
       setProjectsRendered(oldArray => [...oldArray, ...newProjectsRendered]);
-      counter += 8
+      counter += 15
     }else{
       setIsError(true)
     }

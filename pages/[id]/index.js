@@ -7,7 +7,6 @@ export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 export async function getServerSideProps({ query }) {
   let { id } = query
-  console.log(id)
   id = Number(id) + 1
   const { privateKey } = JSON.parse(process.env.GOOGLE_PRIVATE_KEY || '{ privateKey: null }')
 
@@ -49,6 +48,7 @@ export async function getServerSideProps({ query }) {
       content,
     },
   };
+  
   
 }
 
