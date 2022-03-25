@@ -20,11 +20,11 @@ export default function Art({ content }){
             <LineStyle/>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div>
-                    <Author>
+                    {/* <Author>
                         {arrayAuthorName[0]}
-                    </Author>
+                    </Author> */}
                     <ClassName>
-                        {Class}
+                        {Class[8]}
                     </ClassName>
                 </div>
                 <div style={{display: 'flex'}}>
@@ -51,7 +51,7 @@ export default function Art({ content }){
                     Outros Integrantes
                     </Members>
                     <ListMembers>
-                        {arrayAuthorName.slice(1, arrayAuthorName.length).map((item, index) => {
+                        {arrayAuthorName.slice(0, arrayAuthorName.length).map((item, index) => {
                             return <li key={index}>{item}</li>
                         })}
                         
@@ -75,11 +75,16 @@ export default function Art({ content }){
 }
 
 const MainImage = styled.img`
-    width: 784px;
-    height: 784px;
+    min-width: 60%;
+    min-height: 60%;
+
+    max-width: 80%;
+    max-height: 80%;
+    /* width: auto;
+    height: auto; */
 
     @media (max-width: 900px) {
-        width: 80vw;
+        width: 50vw;
         height: 80vw;
     }
 `
