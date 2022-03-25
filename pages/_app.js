@@ -1,4 +1,9 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import 'animate.css';
+import Header from '../components/Header';
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,6 +21,16 @@ const theme = {
 }
 
 export default function App({ Component, pageProps }) {
+  const [projectsRendered, setProjectsRendered] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (searchText != ''){
+      router.push('/search')
+    }
+  }, [searchText])
+
   return (
     <>
       <header>
@@ -26,7 +41,13 @@ export default function App({ Component, pageProps }) {
       </header>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Header setSearchText={setSearchText} searchText={searchText}/>
+        <Component 
+        {...pageProps} 
+        setProjectsRendered={setProjectsRendered} 
+        projectsRendered={projectsRendered}
+        searchText={searchText}
+        />
       </ThemeProvider>
     </>
   )

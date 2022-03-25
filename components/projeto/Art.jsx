@@ -1,18 +1,21 @@
 import Image from "next/image"
 import styled from "styled-components"
 import Footer from "../Footer"
+import TextLink from "../TextLink";
 
 
 export default function Art({ content }){
-    const {ArtName, Description, ImageLink, AuthorName, Class, GithubLink, InstagramLink, Tags} = content;
+    const {ArtName, Description, ImageLink, AuthorName, Class, GithubLink, InstagramLink, Tags, Iframe, IframeLink} = content;
     const arrayAuthorName = AuthorName.split(',')
     const arrayTags = Tags.split(',')
     return(
     <div style={{display: "flex", flexDirection: 'column' , alignItems: "center", justifyContent: "center", marginBottom: 10}}>
         <ArtTitle>{ArtName}</ArtTitle> 
-        <Teste
+        {
+            Iframe ? <IframeComponent src={Iframe} title={ArtName}/> : <MainImage
         src={ImageLink}
         />
+        }
         <ArtDescription>
             <LineStyle/>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
@@ -37,16 +40,25 @@ export default function Art({ content }){
             <TextArtDescription>
             {Description}
             </TextArtDescription>
-            <Members>
-                Outros Integrantes
-            </Members>
 
-            <ListMembers>
-                {arrayAuthorName.slice(1, arrayAuthorName.length).map((item, index) => {
-                    return <li key={index}>{item}</li>
-                })}
-                {arrayAuthorName.length == 1 ? <li>Não há outros integrantes</li>: ''}
-            </ListMembers>
+            {IframeLink ? 
+            <TextLink href={IframeLink} target="_blank">Saiba mais sobre a obra!</TextLink> 
+            : ''}
+            
+            {arrayAuthorName.length == 1 ? '' : 
+                <>
+                    <Members>
+                    Outros Integrantes
+                    </Members>
+                    <ListMembers>
+                        {arrayAuthorName.slice(1, arrayAuthorName.length).map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })}
+                        
+                    </ListMembers>
+                </>
+            }
+            
 
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 {arrayTags.map((item, index) => {
@@ -56,15 +68,13 @@ export default function Art({ content }){
                     </BoxTag>
                     )
                 })}
-                
-                
             </div>
         </ArtDescription>
     </div>
 )
 }
 
-const Teste = styled.img`
+const MainImage = styled.img`
     width: 784px;
     height: 784px;
 
@@ -72,6 +82,13 @@ const Teste = styled.img`
         width: 80vw;
         height: 80vw;
     }
+`
+
+const IframeComponent = styled.iframe`
+    width: 95vw;
+    height: 60vh;
+    border: none;
+    box-shadow: 0px -5px 25px rgba(0, 0, 0, 0.15);
 `
 
 const ArtDescription = styled.div`
