@@ -39,10 +39,11 @@ export async function getServerSideProps({ query }) {
     Class: posts[6],
     GithubLink: posts[16] ? posts[16] : null,
     InstagramLink: posts[14] ? posts[14] : null,
-    Tags: posts[8] ? posts[8] : '',
+    Tags: posts[12] ? posts[12] : '',
     Iframe: posts[4] ? posts[4] : null,
     IframeLink: posts[5] ? posts[5] : null,
   }
+  console.log(content)
   return {
     props: {
       content,
