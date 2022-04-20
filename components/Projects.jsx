@@ -9,6 +9,7 @@ export default function Projects({ projectsRendered, isError }) {
     useEffect(() => {
       setTimeout(() => {setShowProjects(true)}, 5000)
     }, [])
+    
     return (
         <>
           {showProjects == false ? <Oval

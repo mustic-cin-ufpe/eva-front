@@ -24,6 +24,7 @@ export async function getServerSideProps({ query }) {
 
   const authToken = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', authToken });
+  
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range: `dev!A${id}:W`,
