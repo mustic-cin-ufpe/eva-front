@@ -91,11 +91,11 @@ export default function Mosaic({ projectsRendered }) {
             }else{
                 const newProjectsAdded = projectsRendered.slice(projectsRenderedLength, lengthOfNewProjectsRendered)
                 const newProjectsAddedLength = newProjectsAdded.length
-                arrayProjectsRendered[0].push(...newProjectsAdded.slice(0, newProjectsAddedLength/5))
-                arrayProjectsRendered[1].push(...newProjectsAdded.slice(newProjectsAddedLength/5, (2 * newProjectsAddedLength)/5))
-                arrayProjectsRendered[2].push(...newProjectsAdded.slice((2 * newProjectsAddedLength)/5, (3 * newProjectsAddedLength)/5))
-                arrayProjectsRendered[3].push(...newProjectsAdded.slice((3 * newProjectsAddedLength)/5, (4 * newProjectsAddedLength)/5))
-                arrayProjectsRendered[4].push(...newProjectsAdded.slice((4 * newProjectsAddedLength)/5, newProjectsAddedLength))
+                arrayProjectsRendered[0]?.push(...newProjectsAdded.slice(0, newProjectsAddedLength/5))
+                arrayProjectsRendered[1]?.push(...newProjectsAdded.slice(newProjectsAddedLength/5, (2 * newProjectsAddedLength)/5))
+                arrayProjectsRendered[2]?.push(...newProjectsAdded.slice((2 * newProjectsAddedLength)/5, (3 * newProjectsAddedLength)/5))
+                arrayProjectsRendered[3]?.push(...newProjectsAdded.slice((3 * newProjectsAddedLength)/5, (4 * newProjectsAddedLength)/5))
+                arrayProjectsRendered[4]?.push(...newProjectsAdded.slice((4 * newProjectsAddedLength)/5, newProjectsAddedLength))
                 setProjectsRenderedLength(lengthOfNewProjectsRendered)
                 console.log(arrayProjectsRendered)
             }
@@ -125,7 +125,9 @@ export default function Mosaic({ projectsRendered }) {
                                     key={`MosaicImage ${index}`}
                                     src={item[3]}
                                     onClick={(e) => goTo(e, `/${item[0].trim()}`)}
+                                    onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
                                     />
+                                    
                             ))}
                         </div>
                     )

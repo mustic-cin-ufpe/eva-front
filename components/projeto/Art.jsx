@@ -14,17 +14,18 @@ export default function Art({ content }){
         {
             Iframe ? <IframeComponent src={Iframe} title={ArtName}/> : <MainImage
         src={ImageLink}
+        onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
         />
         }
         <ArtDescription>
             <LineStyle/>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div>
-                    <Author>
+                    {/* <Author>
                         {arrayAuthorName[0]}
-                    </Author>
+                    </Author> */}
                     <ClassName>
-                        {Class}
+                        {Class[8]}
                     </ClassName>
                 </div>
                 <div style={{display: 'flex'}}>
@@ -51,7 +52,7 @@ export default function Art({ content }){
                     Outros Integrantes
                     </Members>
                     <ListMembers>
-                        {arrayAuthorName.slice(1, arrayAuthorName.length).map((item, index) => {
+                        {arrayAuthorName.slice(0, arrayAuthorName.length).map((item, index) => {
                             return <li key={index}>{item}</li>
                         })}
                         
@@ -59,8 +60,7 @@ export default function Art({ content }){
                 </>
             }
             
-
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
                 {arrayTags.map((item, index) => {
                     return (
                     <BoxTag key={`Art ${index}`}>
@@ -75,11 +75,16 @@ export default function Art({ content }){
 }
 
 const MainImage = styled.img`
-    width: 784px;
-    height: 784px;
+    min-width: 60%;
+    min-height: 60%;
+
+    max-width: 80%;
+    max-height: 80%;
+    /* width: auto;
+    height: auto; */
 
     @media (max-width: 900px) {
-        width: 80vw;
+        width: 50vw;
         height: 80vw;
     }
 `
@@ -177,20 +182,22 @@ const ListMembers = styled.ul`
     color: #000000;
 `
 const BoxTag = styled.div`
-    width: 80px;
-    height: 40px;
+    width:max-content;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #EAEAEA;
     border-radius: 6px;
-    margin: 15px;
+    margin: 10px;
+    padding: 2px 10px;
 `
 const InfoTag = styled.p`
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 34px;
     color: #000000;
+    white-space: nowrap;
 `
