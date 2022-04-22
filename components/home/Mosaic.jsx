@@ -67,9 +67,9 @@ export default function Mosaic({ projectsRendered }) {
                 //adding projects
                 const newProjectsAdded = projectsRendered.slice(projectsRenderedLength, lengthOfNewProjectsRendered)
                 const newProjectsAddedLength = newProjectsAdded.length
-                arrayProjectsRendered[0].push(...newProjectsAdded.slice(0, newProjectsAddedLength/3))
-                arrayProjectsRendered[1].push(...newProjectsAdded.slice(newProjectsAddedLength/3, 2 * newProjectsAddedLength/3))
-                arrayProjectsRendered[2].push(...newProjectsAdded.slice(2 * newProjectsAddedLength/3, newProjectsAddedLength))
+                arrayProjectsRendered[0]?.push(...newProjectsAdded.slice(0, newProjectsAddedLength/3))
+                arrayProjectsRendered[1]?.push(...newProjectsAdded.slice(newProjectsAddedLength/3, 2 * newProjectsAddedLength/3))
+                arrayProjectsRendered[2]?.push(...newProjectsAdded.slice(2 * newProjectsAddedLength/3, newProjectsAddedLength))
                 setProjectsRenderedLength(lengthOfNewProjectsRendered)
             }
         } else if (pageWidth <= 640){
@@ -79,8 +79,8 @@ export default function Mosaic({ projectsRendered }) {
             }else{
                 const newProjectsAdded = projectsRendered.slice(projectsRenderedLength, lengthOfNewProjectsRendered)
                 const newProjectsAddedLength = newProjectsAdded.length
-                arrayProjectsRendered[0].push(...newProjectsAdded.slice(0, newProjectsAddedLength/2))
-                arrayProjectsRendered[1].push(...newProjectsAdded.slice(newProjectsAddedLength/2, newProjectsAddedLength))
+                arrayProjectsRendered[0]?.push(...newProjectsAdded.slice(0, newProjectsAddedLength/2))
+                arrayProjectsRendered[1]?.push(...newProjectsAdded.slice(newProjectsAddedLength/2, newProjectsAddedLength))
                 setProjectsRenderedLength(lengthOfNewProjectsRendered)
                 console.log(arrayProjectsRendered)
             }
@@ -103,10 +103,8 @@ export default function Mosaic({ projectsRendered }) {
     }
 
     useEffect(() => {
-        if (projectsRenderedLength != 0){
-            console.log('mudou o adding')
-            MosaicOrganizationAdding();
-        }
+        MosaicOrganizationAdding();
+        MosaicOrganizationWidth();
     }, [projectsRendered])
 
     useEffect(() => {

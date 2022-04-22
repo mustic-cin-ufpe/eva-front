@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import Image from 'next/image';
+import { useState } from "react";
 
 export default function SearchBar({ setSearchText }) {
-    
+    const [tempSearchText, setTempSearchText] = useState('')
+    function handleKeyEnter(e) {
+        if (e.key == 'Enter'){
+            setSearchText(tempSearchText)
+        }
+    }
     return (
         <SearchBox>
             <SearchIcon src={'/searchIcon.svg'}/>
-            <InputSearchBox list="tags" placeholder="Busca" onChange={(e) => {setSearchText(e.target.value)}} />
+            <InputSearchBox list="tags" placeholder="Busca" onKeyPress={(e) => { handleKeyEnter(e) }} onChange={(e) => {setTempSearchText(e.target.value)}} />
             <datalist id="tags">
                 <option value="Lorem Ipsum"/>
                 <option value="Lorem Ipsum"/>

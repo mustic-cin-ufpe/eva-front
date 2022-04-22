@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "fs": "^0.0.1-security",
     "googleapis": "^95.0.0",
     "next": "latest",
     "react": "^17.0.2",

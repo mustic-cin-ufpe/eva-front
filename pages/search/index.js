@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { withRouter } from 'next/router';
+import { Router, useRouter, withRouter } from 'next/router';
 import { useEffect, useState } from 'react'
 import Mosaic from "../../components/home/Mosaic";
 
@@ -25,7 +25,7 @@ export async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
-    range: 'dev!A2:D',
+    range: 'dev!A2:M',
     auth: authToken,
   });
 
@@ -38,16 +38,39 @@ export async function getServerSideProps() {
 }
 
 function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }) {
+  const router = useRouter();
   const arrayProjectInfo = posts.filter((value) => {
     if(value[1]) return value
   })
-  useEffect(() => {
-      setProjectsRendered(arrayProjectInfo.filter((value) => {
-          if(value[1]) return value[1].toLowerCase().includes(searchText.toLowerCase())
-      }))
-  }, [searchText])
-  
 
+  useEffect(() => {
+    projectsRendered.length == 0 ? router.push('/') : ''
+  }, [])
+
+
+  useEffect(() => {
+      console.log('escreveu')
+      const tempArray = arrayProjectInfo.filter((value) => {
+        const tags = value[12].split(',')
+        const searchingArray = [value[1], ...tags]
+        if(value[1]) {
+          let hasFind = false
+          searchingArray.map((item) => {
+            if (item.toLowerCase().includes(searchText.toLowerCase())) {
+              hasFind = true
+            }
+
+          })
+          return hasFind
+        }
+      })
+      console.log(tempArray)
+      setProjectsRendered(tempArray)
+  }, [searchText])
+
+  useEffect(() => {
+    console.log(projectsRendered)
+  }, [projectsRendered])
   return (
       <Mosaic projectsRendered={projectsRendered}/>
   )

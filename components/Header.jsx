@@ -3,14 +3,15 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
-import SearchBar from './SearchBar'
-
+import SearchBar from './SearchBar';
 
 export default function Header({ setSearchText }) {
     const router = useRouter();
+    
     const arrayLogos = ['/eva-logo.svg', '/eva-logo(4).svg', '/eva-logo(4).svg'];
     const [actualLogo, setActualLogo] = useState();
     const [isMobile, setIsMobile] = useState(false);
+
     useEffect(() => {
         window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true);
         window.addEventListener('resize', (e) => {window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true)})
@@ -31,7 +32,7 @@ export default function Header({ setSearchText }) {
                         onClick={(e) => goTo(e, '/')} 
                         src={`${actualLogo}`}
                         />
-                        <SearchBar setSearchText={setSearchText}/>
+                        <SearchBar setSearchText={setSearchText} />
                         <CentralizedDiv style={{marginRight: 10, height: '100%'}}>
                             <Image src={'/about-icon.svg'} width={20} height={20} onClick={(e) => goTo(e, 'about')}/>
                             <Image src={'/register-icon.svg'} width={20} height={20}/>
