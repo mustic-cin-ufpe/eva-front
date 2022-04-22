@@ -160,11 +160,6 @@
   "resolved" "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-12.1.0.tgz"
   "version" "12.1.0"
 
-"@next/swc-darwin-x64@12.1.0":
-  "integrity" "sha512-ieAz0/J0PhmbZBB8+EA/JGdhRHBogF8BWaeqR7hwveb6SYEIJaDNQy0I+ZN8gF8hLj63bEDxJAs/cEhdnTq+ug=="
-  "resolved" "https://registry.npmjs.org/@next/swc-darwin-x64/-/swc-darwin-x64-12.1.0.tgz"
-  "version" "12.1.0"
-
 "abort-controller@^3.0.0":
   "integrity" "sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg=="
   "resolved" "https://registry.npmjs.org/abort-controller/-/abort-controller-3.0.0.tgz"
@@ -312,6 +307,11 @@
   "integrity" "sha512-dtm4QZH9nZtcDt8qJiOH9fcQd1NAgi+K1O2DbE6GG1PPCK/BWfOH3idCTRQ4ImXRUOyopDEgDEnVEE7Y/2Wrig=="
   "resolved" "https://registry.npmjs.org/fast-text-encoding/-/fast-text-encoding-1.0.3.tgz"
   "version" "1.0.3"
+
+"fs@^0.0.1-security":
+  "integrity" "sha1-invTcYa23d84E/I4WLV+yq9eQdQ="
+  "resolved" "https://registry.npmjs.org/fs/-/fs-0.0.1-security.tgz"
+  "version" "0.0.1-security"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
