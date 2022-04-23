@@ -115,20 +115,23 @@ export default function Mosaic({ projectsRendered }) {
         <GridImages>
             { arrayProjectsRendered.length > 0 ?
                 arrayProjectsRendered.map((project, projectIndex) => {
-                    return (
-                        <div key={`${projectIndex}`} style={{margin: 0, display: 'grid', gridTemplateRows: '1fr auto', rowGap: 32, breakInside: 'avoid', minHeight: 650}}>
-                            {project.map((item, index) => (
-                                    <img
-                                    style={{width: '100%', height: 'auto', cursor: 'pointer'}} 
-                                    key={`MosaicImage ${index}`}
-                                    src={item[3]}
-                                    onClick={(e) => goTo(e, `/${item[0].trim()}`)}
-                                    onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
-                                    />
-                                    
-                            ))}
-                        </div>
-                    )
+
+                        return (
+                            project.length > 0 ?
+                                <div key={`${projectIndex}`} style={{margin: 0, display: 'grid', gridTemplateRows: '1fr auto', rowGap: 32, breakInside: 'avoid', minHeight: 650}}>
+                                    {project.map((item, index) => (
+                                            <img
+                                            style={{width: '100%', height: 'auto', cursor: 'pointer'}} 
+                                            key={`MosaicImage ${index}`}
+                                            src={item[3]}
+                                            onClick={(e) => goTo(e, `/${item[0].trim()}`)}
+                                            onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
+                                            />
+                                            
+                                    ))}
+                                </div>
+                            : ''
+                        )
                 }) : ''
             }
         </GridImages>

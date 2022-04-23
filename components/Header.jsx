@@ -35,6 +35,7 @@ export default function Header({ setSearchText, logos }) {
                         <LogoImage
                         onClick={(e) => goTo(e, '/')} 
                         src={`${actualLogo}`}
+                        onError={(e)=> {console.log(e)}}
                         />
                         <SearchBar setSearchText={setSearchText} />
                         <CentralizedDiv style={{marginRight: 10, height: '100%'}}>
@@ -71,7 +72,7 @@ const LogoImage = styled.img`
 `
 const HeaderStyle = styled.header`
     max-width: 100vw;
-    height: 8vh;
+    height: 9vh;
     background-color: white;
     box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
     display: flex;
