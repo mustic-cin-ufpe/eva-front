@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { useState } from "react";
 
 export default function SearchBar({ setSearchText }) {
-    const [tempSearchText, setTempSearchText] = useState('')
+    const [tempSearchText, setTempSearchText] = useState('');
+
     function handleKeyEnter(e) {
         if (e.key == 'Enter'){
             setSearchText(tempSearchText)

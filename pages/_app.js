@@ -23,6 +23,7 @@ const theme = {
 export default function App({ Component, pageProps }) {
   const [projectsRendered, setProjectsRendered] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [logos, setLogos] = useState([])
   const router = useRouter();
   
   useEffect(() => {
@@ -41,12 +42,13 @@ export default function App({ Component, pageProps }) {
       </header>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Header setSearchText={setSearchText} searchText={searchText}/>
+        <Header setSearchText={setSearchText} searchText={searchText} logos={logos}/>
         <Component 
         {...pageProps} 
         setProjectsRendered={setProjectsRendered} 
         projectsRendered={projectsRendered}
         searchText={searchText}
+        setLogos={setLogos}
         />
       </ThemeProvider>
     </>

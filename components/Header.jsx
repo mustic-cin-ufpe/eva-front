@@ -5,17 +5,21 @@ import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
 import SearchBar from './SearchBar';
 
-export default function Header({ setSearchText }) {
+export default function Header({ setSearchText, logos }) {
     const router = useRouter();
-    
-    const arrayLogos = ['/eva-logo.svg', '/eva-logo(4).svg', '/eva-logo(4).svg'];
     const [actualLogo, setActualLogo] = useState();
     const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        if (logos.length != 0){
+            console.log(logos[0])
+            setActualLogo(logos[getRandomArbitrary(0, logos.length - 1)][1]);
+        }
+    }, [logos])
 
     useEffect(() => {
         window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true);
         window.addEventListener('resize', (e) => {window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true)})
-        setActualLogo(arrayLogos[getRandomArbitrary(0, 2)]);
     }, [])
     function goTo(e, href){
         e.preventDefault()
