@@ -14,6 +14,7 @@ export default function Art({ content }){
         {
             Iframe ? <IframeComponent src={Iframe} title={ArtName}/> : <MainImage
         src={ImageLink}
+        onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
         />
         }
         <ArtDescription>
@@ -59,8 +60,7 @@ export default function Art({ content }){
                 </>
             }
             
-
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
                 {arrayTags.map((item, index) => {
                     return (
                     <BoxTag key={`Art ${index}`}>
@@ -182,20 +182,22 @@ const ListMembers = styled.ul`
     color: #000000;
 `
 const BoxTag = styled.div`
-    width: 80px;
-    height: 40px;
+    width:max-content;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #EAEAEA;
     border-radius: 6px;
-    margin: 15px;
+    margin: 10px;
+    padding: 2px 10px;
 `
 const InfoTag = styled.p`
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 34px;
     color: #000000;
+    white-space: nowrap;
 `

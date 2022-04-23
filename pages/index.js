@@ -28,15 +28,22 @@ export async function getServerSideProps() {
     range: 'dev!A2:D',
     auth: authToken,
   });
+  const responseLogo = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.SHEET_ID,
+    range: 'logos!A2:B',
+    auth: authToken,
+  });
+  const sheetsLogos = responseLogo.data.values;
   const posts = response.data.values;
   return {
     props: {
       posts,
+      sheetsLogos,
     },
   };
 }
 
-export default function Home({ posts, setProjectsRendered, projectsRendered}) {
+export default function Home({ posts, sheetsLogos, setProjectsRendered, projectsRendered, setLogos}) {
   const [isError, setIsError] = useState(false);
   let counter = 16
 
@@ -51,15 +58,16 @@ export default function Home({ posts, setProjectsRendered, projectsRendered}) {
   }
   
   useEffect(() => {
+    setLogos(sheetsLogos)
     setProjectsRendered(arrayProjectInfo.slice(0, 16))
     window.addEventListener('scroll', handleScrool)
   }, [])
 
   function loadMoreProjects(){
     if (counter < arrayProjectInfo.length){
-      const newProjectsRendered = arrayProjectInfo.slice(counter, counter + 8)
+      const newProjectsRendered = arrayProjectInfo.slice(counter, counter + 15)
       setProjectsRendered(oldArray => [...oldArray, ...newProjectsRendered]);
-      counter += 8
+      counter += 15
     }else{
       setIsError(true)
     }

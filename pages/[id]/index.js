@@ -7,7 +7,6 @@ export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 export async function getServerSideProps({ query }) {
   let { id } = query
-  console.log(id)
   id = Number(id) + 1
   const { privateKey } = JSON.parse(process.env.GOOGLE_PRIVATE_KEY || '{ privateKey: null }')
 
@@ -25,6 +24,7 @@ export async function getServerSideProps({ query }) {
 
   const authToken = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', authToken });
+  
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range: `dev!A${id}:W`,
@@ -50,6 +50,7 @@ export async function getServerSideProps({ query }) {
       content,
     },
   };
+  
   
 }
 
