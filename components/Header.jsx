@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
 import SearchBar from './SearchBar';
-
+import Link from 'next/link'
 export default function Header({ setSearchText, logos }) {
     const router = useRouter();
     const [actualLogo, setActualLogo] = useState();
@@ -50,7 +50,7 @@ export default function Header({ setSearchText, logos }) {
                         src={`${actualLogo}`}
                         />
                         <CentralizedDiv style={{width: '550px', justifyContent: 'space-around'}}>
-                            <HeaderText>Registre seu Projeto</HeaderText>
+                            <HeaderText href='https://forms.gle/iauncyEiWJfiwq4C7' target={'_blank'}> Registre seu Projeto</HeaderText>
                             <HeaderText onClick={(e) => goTo(e, 'about')}>Sobre</HeaderText>
                             <SearchBar setSearchText={setSearchText}/>
                         </CentralizedDiv>
@@ -99,7 +99,8 @@ const HeaderStyle = styled.header`
         }
     }
 `
-const HeaderText = styled.h1`
+const HeaderText = styled.a`
+    text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-family: Inter;
     font-style: normal;

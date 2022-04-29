@@ -21,11 +21,8 @@ export default function Art({ content }){
             <LineStyle/>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                 <div>
-                    {/* <Author>
-                        {arrayAuthorName[0]}
-                    </Author> */}
                     <ClassName>
-                        {Class[8]}
+                        {Class}
                     </ClassName>
                 </div>
                 <div style={{display: 'flex'}}>
