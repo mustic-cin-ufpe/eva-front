@@ -4,18 +4,22 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CentralizedDiv from './CentralizedDiv'
 import SearchBar from './SearchBar';
-
-export default function Header({ setSearchText }) {
+import Link from 'next/link'
+export default function Header({ setSearchText, logos }) {
     const router = useRouter();
-    
-    const arrayLogos = ['/eva-logo.svg', '/eva-logo(4).svg', '/eva-logo(4).svg'];
     const [actualLogo, setActualLogo] = useState();
     const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        if (logos.length != 0){
+            console.log(logos[0])
+            setActualLogo(logos[getRandomArbitrary(0, logos.length - 1)][1]);
+        }
+    }, [logos])
 
     useEffect(() => {
         window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true);
         window.addEventListener('resize', (e) => {window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true)})
-        setActualLogo(arrayLogos[getRandomArbitrary(0, 2)]);
     }, [])
     function goTo(e, href){
         e.preventDefault()
@@ -31,6 +35,7 @@ export default function Header({ setSearchText }) {
                         <LogoImage
                         onClick={(e) => goTo(e, '/')} 
                         src={`${actualLogo}`}
+                        onError={(e)=> {console.log(e)}}
                         />
                         <SearchBar setSearchText={setSearchText} />
                         <CentralizedDiv style={{marginRight: 10, height: '100%'}}>
@@ -45,7 +50,7 @@ export default function Header({ setSearchText }) {
                         src={`${actualLogo}`}
                         />
                         <CentralizedDiv style={{width: '550px', justifyContent: 'space-around'}}>
-                            <HeaderText>Registre seu Projeto</HeaderText>
+                            <HeaderText href='https://forms.gle/iauncyEiWJfiwq4C7' target={'_blank'}> Registre seu Projeto</HeaderText>
                             <HeaderText onClick={(e) => goTo(e, 'about')}>Sobre</HeaderText>
                             <SearchBar setSearchText={setSearchText}/>
                         </CentralizedDiv>
@@ -67,7 +72,7 @@ const LogoImage = styled.img`
 `
 const HeaderStyle = styled.header`
     max-width: 100vw;
-    height: 8vh;
+    height: 9vh;
     background-color: white;
     box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
     display: flex;
@@ -94,7 +99,8 @@ const HeaderStyle = styled.header`
         }
     }
 `
-const HeaderText = styled.h1`
+const HeaderText = styled.a`
+    text-decoration: none;
     font-family: 'Inter', sans-serif;
     font-family: Inter;
     font-style: normal;

@@ -37,7 +37,7 @@ export async function getServerSideProps({ query }) {
     Description: posts[2],
     ImageLink: posts[3],
     AuthorName: posts[6],
-    Class: posts[6],
+    Class: posts[8],
     GithubLink: posts[16] ? posts[16] : null,
     InstagramLink: posts[14] ? posts[14] : null,
     Tags: posts[12] ? posts[12] : '',

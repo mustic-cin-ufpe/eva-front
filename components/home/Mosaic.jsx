@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
-export default function Mosaic({ projectsRendered }) {
+export default function Mosaic({ projectsRendered}) {
     const router = useRouter();
     const [pageWidth, setPageWidth] = useState('');
     const [arrayProjectsRendered, setArrayProjectsRendered] = useState([]);
@@ -114,24 +114,34 @@ export default function Mosaic({ projectsRendered }) {
     return (
         <GridImages>
             { arrayProjectsRendered.length > 0 ?
-                arrayProjectsRendered.map((project, projectIndex) => {
-                    return (
-                        <div key={`${projectIndex}`} style={{margin: 0, display: 'grid', gridTemplateRows: '1fr auto', rowGap: 32, breakInside: 'avoid', minHeight: 650}}>
-                            {project.map((item, index) => (
-                                    <img
-                                    style={{width: '100%', height: 'auto', cursor: 'pointer'}} 
-                                    key={`MosaicImage ${index}`}
-                                    src={item[3]}
-                                    onClick={(e) => goTo(e, `/${item[0].trim()}`)}
-                                    onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
-                                    />
+                arrayProjectsRendered.map((project, projectIndex, ) => {
+
+                        return (
+                            project.length > 0 ?
+                                <div key={`${projectIndex}`} style={{margin: 0, display: 'grid', gridTemplateRows: '1fr auto', rowGap: 32, breakInside: 'avoid', minHeight: 650}}>
+                                    {project.map((item, index) => (
+                                            <div>
+                                            
+                                            <img
+                                            style={{width: '100%', height: 'auto', cursor: 'pointer'}} 
+                                            key={`MosaicImage ${index}`}
+                                            src={item[3]}
+                                            onClick={(e) => goTo(e, `/${item[0].trim()}`)}
+                                            onError={(e)=>{e.target.onerror = null; e.target.src="https://www.margirius.com.br/wp-content/uploads/woocommerce-placeholder.png"}}
+                                            />
+                                            <ArtTitle>{item[1]}</ArtTitle>
+                        
+                                            </div>
+                                    ))}
                                     
-                            ))}
-                        </div>
-                    )
+                                </div>
+                            : ''
+                        )
                 }) : ''
             }
+            
         </GridImages>
+        
     )
 }
 
@@ -161,4 +171,13 @@ const GridImages = styled.section`
             row-gap: 0 !important;
         }
     }
+`
+const ArtTitle = styled.h1`
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    text-align: center;
+    color: black;
+    margin-top: 0;
 `
