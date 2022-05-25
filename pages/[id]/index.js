@@ -21,17 +21,16 @@ export async function getServerSideProps({ query }) {
     },
   })
 
-
   const authToken = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', authToken });
-  
+
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range: `dev!A${id}:W`,
     auth: authToken,
   });
   const posts = response.data.values[0];
-  
+
   const content = {
     ArtName: posts[1],
     Description: posts[2],
@@ -50,15 +49,15 @@ export async function getServerSideProps({ query }) {
       content,
     },
   };
-  
-  
+
+
 }
 
 export default function Project({ content }) {
   return (
     <>
-      <Art content={content}/>
-      <Footer/>
+      <Art content={content} />
+      <Footer />
     </>
   )
 }

@@ -20,7 +20,6 @@ export async function getServerSideProps() {
     },
   })
 
-
   const authToken = await auth.getClient();
   const sheets = google.sheets({ version: 'v4', authToken });
   const response = await sheets.spreadsheets.values.get({
@@ -43,38 +42,38 @@ export async function getServerSideProps() {
   };
 }
 
-export default function Home({ posts, sheetsLogos, setProjectsRendered, projectsRendered, setLogos}) {
+export default function Home({ posts, sheetsLogos, setProjectsRendered, projectsRendered, setLogos }) {
   const [isError, setIsError] = useState(false);
   let counter = 16
 
   const arrayProjectInfo = posts.filter((value) => {
-    if(value[1]) return value
+    if (value[1]) return value
   })
 
   const handleScrool = (e) => {
-    if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight){
+    if (window.innerHeight + e.target.documentElement.scrollTop + 1 >= e.target.documentElement.scrollHeight) {
       loadMoreProjects()
     }
   }
-  
+
   useEffect(() => {
     setLogos(sheetsLogos)
     setProjectsRendered(arrayProjectInfo.slice(0, 16))
     window.addEventListener('scroll', handleScrool)
   }, [])
 
-  function loadMoreProjects(){
-    if (counter < arrayProjectInfo.length){
+  function loadMoreProjects() {
+    if (counter < arrayProjectInfo.length) {
       const newProjectsRendered = arrayProjectInfo.slice(counter, counter + 15)
       setProjectsRendered(oldArray => [...oldArray, ...newProjectsRendered]);
       counter += 15
-    }else{
+    } else {
       setIsError(true)
     }
   }
   return (
-      <>
-        <Projects isError={isError} projectsRendered={projectsRendered}/>
-      </>
-    )
+    <>
+      <Projects isError={isError} projectsRendered={projectsRendered} />
+    </>
+  )
 }
