@@ -25,7 +25,7 @@ export default function Art({ content }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 10,
+        marginBottom: 100,
       }}
     >
       <ArtTitle>{ArtName}</ArtTitle>
@@ -79,7 +79,7 @@ export default function Art({ content }) {
 
         {IframeLink ? (
           <TextLink href={IframeLink} target="_blank">
-            Saiba mais sobre a obra!
+            Saiba mais sobre a obra
           </TextLink>
         ) : (
           ""

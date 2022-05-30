@@ -32,6 +32,7 @@ export async function getServerSideProps() {
     auth: authToken,
   });
   const sheetsLogos = responseLogo.data.values;
+  console.log("sheetsLogos %o", sheetsLogos);
   const posts = response.data.values;
   return {
     props: {

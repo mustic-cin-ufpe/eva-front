@@ -213,7 +213,7 @@ export default function Mosaic({ projectsRendered }) {
                 }}
               >
                 {project.map((item, index) => (
-                  <div>
+                  <div key={index}>
                     <img
                       style={{
                         width: "100%",

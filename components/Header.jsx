@@ -11,18 +11,23 @@ export default function Header({ setSearchText, logos }) {
   const [actualLogo, setActualLogo] = useState();
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    if (logos.length != 0) {
-      console.log(logos[0]);
-      setActualLogo(logos[getRandomArbitrary(0, logos.length - 1)][1]);
+  function getLogo() {
+    const index = getRandomArbitrary(0, 10);
+    let extension = "svg";
+    if (index >= 4) {
+      extension = "png";
     }
-  }, [logos]);
+    const result = `eva-logos/eva-logo-${index}.${extension}`;
+    console.log("logo result %o", result);
+    return result;
+  }
 
   useEffect(() => {
     window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true);
     window.addEventListener("resize", (e) => {
       window.innerWidth >= 630 ? setIsMobile(false) : setIsMobile(true);
     });
+    setActualLogo(getLogo());
   }, []);
   function goTo(e, href) {
     e.preventDefault();
