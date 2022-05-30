@@ -1,5 +1,4 @@
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import Art from "../../components/projeto/Art";
 import { google } from "googleapis";
 
@@ -49,8 +48,6 @@ export async function getServerSideProps({ query }) {
       content,
     },
   };
-
-
 }
 
 export default function Project({ content }) {

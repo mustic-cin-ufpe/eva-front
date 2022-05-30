@@ -1,5 +1,4 @@
 import Projects from "../components/Projects";
-import Header from '../components/Header'
 import { useEffect, useState } from "react";
 import { google } from 'googleapis';
 

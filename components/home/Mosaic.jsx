@@ -195,7 +195,7 @@ export default function Mosaic({ projectsRendered }) {
     console.log("mudou o width");
     MosaicOrganizationWidth();
   }, [pageWidth]);
-  
+
   return (
     <GridImages>
       {arrayProjectsRendered.length > 0
@@ -249,7 +249,7 @@ const GridImages = styled.section`
   -moz-column-gap: 32px;
   column-count: 5;
   column-gap: 32px;
-  margin: 30px 50px;
+  margin: 30px 0px 100px 0px;
 
   @media (max-width: 1500px) {
     -moz-column-count: 3;
