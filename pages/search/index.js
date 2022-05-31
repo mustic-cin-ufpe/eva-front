@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import { Router, useRouter, withRouter } from 'next/router';
 import { useEffect, useState } from 'react'
-import Mosaic from "../../components/home/Mosaic";
+import GridMosaic from "../../components/home/GridMosaic";
 
 export const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -40,7 +40,7 @@ export async function getServerSideProps() {
 function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }) {
   const router = useRouter();
   const arrayProjectInfo = posts.filter((value) => {
-    if(value[1]) return value
+    if (value[1]) return value
   })
 
   useEffect(() => {
@@ -49,30 +49,30 @@ function SearchPage({ posts, projectsRendered, setProjectsRendered, searchText }
 
 
   useEffect(() => {
-      console.log('escreveu')
-      const tempArray = arrayProjectInfo.filter((value) => {
-        const tags = value[12].split(',')
-        const searchingArray = [value[1], ...tags]
-        if(value[1]) {
-          let hasFind = false
-          searchingArray.map((item) => {
-            if (item.toLowerCase().includes(searchText.toLowerCase())) {
-              hasFind = true
-            }
+    console.log('escreveu')
+    const tempArray = arrayProjectInfo.filter((value) => {
+      const tags = value[12].split(',')
+      const searchingArray = [value[1], ...tags]
+      if (value[1]) {
+        let hasFind = false
+        searchingArray.map((item) => {
+          if (item.toLowerCase().includes(searchText.toLowerCase())) {
+            hasFind = true
+          }
 
-          })
-          return hasFind
-        }
-      })
-      console.log(tempArray)
-      setProjectsRendered(tempArray)
+        })
+        return hasFind
+      }
+    })
+    console.log(tempArray)
+    setProjectsRendered(tempArray)
   }, [searchText])
 
   useEffect(() => {
     console.log(projectsRendered)
   }, [projectsRendered])
   return (
-      <Mosaic projectsRendered={projectsRendered}/>
+    <GridMosaic projectsRendered={projectsRendered} />
   )
 }
 

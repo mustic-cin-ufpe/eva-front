@@ -77,19 +77,9 @@ export default function Art({ content }) {
 
         <TextArtDescription>{Description}</TextArtDescription>
 
-        {IframeLink ? (
-          <TextLink href={IframeLink} target="_blank">
-            Saiba mais sobre a obra
-          </TextLink>
-        ) : (
-          ""
-        )}
-
-        {arrayAuthorName.length == 1 ? (
-          ""
-        ) : (
+        {arrayAuthorName.length > 0 ? (
           <>
-            <Members>Outros Integrantes</Members>
+            <Members>Autoria</Members>
             <ListMembers>
               {arrayAuthorName
                 .slice(0, arrayAuthorName.length)
@@ -98,6 +88,16 @@ export default function Art({ content }) {
                 })}
             </ListMembers>
           </>
+        ) : (
+          "Sem autoria registrada"
+        )}
+
+        {IframeLink ? (
+          <TextLink href={IframeLink} target="_blank">
+            Saiba mais sobre a obra
+          </TextLink>
+        ) : (
+          ""
         )}
 
         <div
@@ -216,7 +216,7 @@ const Members = styled.h3`
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
-  line-height: 160%;
+  line-height: 100%;
   color: #000000;
 `;
 const ListMembers = styled.ul`
@@ -224,7 +224,7 @@ const ListMembers = styled.ul`
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
-  line-height: 170%;
+  line-height: 100%;
   color: #000000;
 `;
 const BoxTag = styled.div`
