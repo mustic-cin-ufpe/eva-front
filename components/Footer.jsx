@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <FooterStyle className="animate__animated animate__slideInUp">
       <Image src={"/eva-logo-footer.svg"} width={150} height={50} />
-      <Image src={"/cin-ufpe.png"} width={150} height={52} />
-      <Image src={"/proexc.png"} width={150} height={83} />
-      <Image src={"/ufpe.png"} width={150} height={78} />
+      <Image src={"/institution-logos/cin-ufpe.png"} width={150} height={52} />
+      <Image src={"/institution-logos/proexc.png"} width={150} height={83} />
+      <Image src={"/institution-logos/ufpe.png"} width={150} height={78} />
     </FooterStyle>
   );
 }
